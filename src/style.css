@@ -59,6 +59,5 @@ body{
 }
 
 .navbar ul li a:hover {
-    color: var(--color-2);
     background-color: var(--accent-color);
 }
