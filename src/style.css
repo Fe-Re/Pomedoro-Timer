@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+:root{
+    --bg-color-1: #0F0E1C ;
+    --bg-color-2: #382E4E ;
+    --color-1: #FFE6E6 ;
+    --color-2: #E1AFD1 ;
+    --accent-color: #7469B6 ;
+    --icon-color: #AD88C6 ;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Noto Sans Display", Arial, Helvetica, sans-serif;
+}
