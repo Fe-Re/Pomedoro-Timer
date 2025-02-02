@@ -1,41 +1,64 @@
 const timer = document.querySelector('.timer');
 const start = document.querySelector('.start-timer');
-let interval; 
+const add5 = document.querySelector(`.add-5`);
+const sub5 = document.querySelector(`.sub-5`);
+let interval;
+let isRunning = false;
+let currentMM = 25;
+let currentSS = 0;
 
-start.addEventListener('click', () => {
-    console.log(`Timer started!`);
-    if(interval) clearInterval(interval);
-    
-    const startTime = timer.textContent;
-    let mm = parseInt(startTime.slice(0, 2), 10);
-    let ss = parseInt(startTime.slice(3, 5), 10);
-    
-    countdown(mm, ss);
 
-    start.textContent = `stop`;
+add5.addEventListener('click', () => {
+    currentMM = Number(timer.textContent.slice(0,2)) + 5;
+    timer.textContent = `${String(currentMM).padStart(2, '0')}:${String(currentSS).padStart(2, '0')}`;
+    currentMM = timer.textContent.slice(0,2);
+    currentSS = timer.textContent.slice(3,5);
 });
 
-function countdown(mm, ss) {
+sub5.addEventListener('click', () => {
+    currentMM = Number(timer.textContent.slice(0,2)) - 5;
+    timer.textContent = `${String(currentMM).padStart(2, '0')}:${String(currentSS).padStart(2, '0')}`;
+    currentMM = timer.textContent.slice(0,2);
+    currentSS = timer.textContent.slice(3,5);
+});
+
+start.addEventListener('click', () => {
+    if (!isRunning) {
+        // Starten
+        isRunning = true;
+        start.textContent = 'stop';
+        
+        const startTime = timer.textContent;
+        currentMM = parseInt(startTime.slice(0, 2), 10);
+        currentSS = parseInt(startTime.slice(3, 5), 10);
+        
+        countdown();
+    } else {
+        // Stoppen
+        isRunning = false;
+        start.textContent = 'start';
+        clearInterval(interval);
+    }
+});
+
+function countdown() {
     interval = setInterval(() => {
+        timer.textContent = `${String(currentMM).padStart(2, '0')}:${String(currentSS).padStart(2, '0')}`;
 
-
-        const displayMM = String(mm).padStart(2, '0');
-        const displaySS = String(ss).padStart(2, '0');
-        timer.textContent = `${displayMM}:${displaySS}`;
-
-        if(mm === 0 && ss === 0) {
+ 
+        if (currentMM === 0 && currentSS === 0) {
             clearInterval(interval);
-            timer.textContent = "00:00";
+            isRunning = false;
+            start.textContent = 'start';
             return;
         }
 
-        if(ss === 0) {
-            mm--;
-            ss = 59;
+
+        if (currentSS === 0) {
+            currentMM--;
+            currentSS = 59;
         } else {
-            ss--;
+            currentSS--;
         }
-
-
     }, 1000);
 }
