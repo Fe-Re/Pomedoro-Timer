@@ -138,6 +138,7 @@ body{
 }
 
 .start-timer,
+.reset-timer,
 .adjust-buttons > div,
 .pause-buttons > div {
     display: inline-block;
@@ -156,10 +157,13 @@ body{
     border: 1px solid rgba(255, 255, 255, 0.2); 
     transition: all ease 0.3s;
 }
-.adjust-buttons > div {
+.adjust-buttons > div, .start-buttons > div {
     padding: 10px 55px;
 }
+
+
 .start-timer:hover,
+.reset-timer:hover,
 .adjust-buttons > div:hover,
 .pause-buttons > div:hover {
     background: rgba(255, 255, 255, 0.25) !important; 
@@ -168,6 +172,7 @@ body{
 }
 
 .start-timer:active,
+.reset-timer:active,
 .adjust-buttons > div:active,
 .pause-buttons > div:active {
     transform: scale(0.9);
