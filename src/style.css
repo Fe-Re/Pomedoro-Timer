@@ -18,16 +18,37 @@ body{
     background-color: var(--bg-color-1);
     font-size: 12pt;
     color: var(--color-1);
-    padding-top: 7vh; 
+    padding-top: 75px; 
     min-height: 100vh;
     display: flex;    
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow-x: hidden;
 }
+
+.bg-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.bg-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    filter: brightness(0.4);
+}
+
 
 .navbar {
     width: 100vw;
-    height: 7vh;
+    height: 75px;
     background-color: var(--bg-color-2);
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -40,6 +61,15 @@ body{
     align-items: center;
     padding: 0 20px; 
     font-weight: 300;
+    z-index: 100;
+
+    /* milky effect */
+    box-shadow: 0 0 10px 2px rgb(56, 46, 78, 0.4) ;
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px); 
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2), 0 0 20px rgba(0, 0, 0, 0.3); 
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .nav-logo {
@@ -70,16 +100,27 @@ body{
 }
 
 .timer-container{
-    width: 60vw;
-    height: 60vw;
+    width: 900px;
+    height: 750px;
     display: flex;
+    margin: 50px 0;
     justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
     background-color:  rgb(56, 46, 78, 0.4);
     border-radius: 30px;
+
+    /* milky effect */
     box-shadow: 0 0 10px 2px rgb(56, 46, 78, 0.4) ;
+    background: rgba(255, 255, 255, 0.1) !important; 
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2), 0 0 20px rgba(0, 0, 0, 0.3); 
+    border: 1px solid rgba(255, 255, 255, 0.2); 
+    position: relative; 
 }
+
+
 
 .timer-container .quote {
     font-size: 1.2rem;
@@ -88,3 +129,12 @@ body{
 .timer-container .timer{
     font-size: 9rem;
 }
+
+.adjust-buttons > div,
+.pause-buttons > div {
+    display: inline-block;
+    margin: 0 10px;
+    border: 2px white solid;
+    padding: 5px 10px;
+}
+
