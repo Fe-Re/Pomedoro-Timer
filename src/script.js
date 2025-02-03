@@ -3,6 +3,7 @@ const start = document.querySelector('.start-timer');
 const add5 = document.querySelector(`.add-5`);
 const sub5 = document.querySelector(`.sub-5`);
 const reset = document.querySelector(`.reset-timer`);
+const quote = document.querySelector(`.quote`);
 let interval;
 let isRunning = false;
 let currentMM = 25;
@@ -45,7 +46,31 @@ document.addEventListener('DOMContentLoaded', () => {
         currentMM = timer.textContent.slice(0,2);
         currentSS = timer.textContent.slice(3,5);
     });
+
+    loadQuote();
 });
+
+function loadQuote(){
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+
+    let quotes = [`“Create with the heart; build with the mind.” ― Criss Jami`,
+        `“When you have to make a choice and don’t make it, that in itself is a choice.” ― William James`,
+        `“What we fear doing most is usually what we most need to do.” – Tim Ferriss`,
+        `“If you spend too much time thinking about a thing, you’ll never get it done.” – Bruce Lee`,
+        `“Action is the foundational key to all success.” – Pablo Picasso`,
+        `“You may delay, but time will not.” – Benjamin Franklin`,
+        `“It is not the mountain we conquer, but ourselves.” ― Sir Edmund Hillary`,
+        `“If you love life, don’t waste time, for time is what life is made of.” – Bruce Lee`]
+
+       let randomSelect = getRandomInt(quotes.length);
+       console.log(randomSelect);
+       console.log(quotes.length)
+
+    quote.innerHTML = quotes[randomSelect];
+
+}
 
 
 
