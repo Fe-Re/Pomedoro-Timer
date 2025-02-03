@@ -14,15 +14,14 @@ let isRunning = false;
 let currentMM = 25;
 let currentSS = 0;
 
-let stats = [{
-    date: '2025-02-03',
-    workSec: 0,
-    breakSec: 0,
-}];
-
+let stats = JSON.parse(localStorage.getItem(`stats`)) || [];
+if (!stats.length || stats[0].date !== today) {
+    stats.unshift({ date: today, workSec: 0, breakSec: 0 });
+}
 if (today !== stats[0].date) {
     stats.unshift({ date: today, workSec: 0, breakSec: 0 });
     console.log(`added new stats object.`);
+    localStorage.setItem(`stats`, JSON.stringify(stats));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -160,26 +159,16 @@ function switchView(viewId) {
     });
   });
 
-function getWorkOrBreakTime() {
+  function getWorkOrBreakTime() {
     const currentLabel = timer.style.getPropertyValue('--timer-label').replace(/'/g, "");
     if(currentLabel === 'Work'){
-        const start = Date.now();
-        console.log('work starting timer...');
-        setTimeout(() => {
-            const millis = Date.now() - start;
-            console.log(`seconds elapsed = ${Math.floor(millis / 1000)}`);
-        }, 1000);
         stats[0].workSec += 1;
-        console.log(stats[0].workSec);
+        console.log(`work timer: ${stats[0].workSec}`);
+        localStorage.setItem(`stats`, JSON.stringify(stats)); 
     }   
     if(currentLabel === 'Break'){
-        const start = Date.now();
-        console.log('break starting timer...');
-        setTimeout(() => {
-            const millis = Date.now() - start;
-            console.log(`seconds elapsed = ${Math.floor(millis / 1000)}`);
-        }, 1000);
         stats[0].breakSec += 1;
-        console.log(stats[0].breakSec);
+        console.log(`break timer: ${stats[0].breakSec}`);
+        localStorage.setItem(`stats`, JSON.stringify(stats)); 
     }
 }
