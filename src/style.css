@@ -118,6 +118,19 @@ body{
     color: var(--color-1);
   }
 
+  .navbar ul li a.active-tab {
+    background-color: var(--accent-color);
+  }
+
+  .hidden-view {
+    display: none !important;
+  }
+  
+  .active-view {
+    display: flex !important;
+  }
+  
+
 .timer-container{
     width: 900px;
     height: 750px;
@@ -137,8 +150,6 @@ body{
     box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.2), 0 0 20px rgba(0, 0, 0, 0.3); 
     border: 1px solid rgba(255, 255, 255, 0.2); 
 }
-
-
 
 .timer-container .quote {
     font-size: 1.2rem;

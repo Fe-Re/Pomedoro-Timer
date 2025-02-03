@@ -113,3 +113,33 @@ function countdown() {
 function updateDisplay() {
     timer.textContent = `${String(currentMM).padStart(2, '0')}:${String(currentSS).padStart(2, '0')}`;
 }
+
+function switchView(viewId) {
+
+
+    document.querySelectorAll('.content-container > div').forEach(container => {
+      container.classList.add('hidden-view');
+      container.classList.remove('active-view');
+    });
+  
+    const activeView = document.querySelector(`.${viewId}-container`);
+    if (activeView) {
+        activeView.classList.remove('hidden-view');
+        activeView.classList.add('active-view');
+      } else {
+        console.error(`Container für ${viewId} nicht gefunden!`);
+      }
+
+    document.querySelectorAll('[data-view]').forEach(link => {
+      link.classList.remove('active-tab');
+    });
+    document.querySelector(`[data-view="${viewId}"]`).classList.add('active-tab');
+  }
+
+  document.querySelectorAll('[data-view]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const viewId = e.currentTarget.dataset.view;
+      switchView(viewId);
+    });
+  });
