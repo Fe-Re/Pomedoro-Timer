@@ -5,13 +5,21 @@ const sub5 = document.querySelector(`.sub-5`);
 const reset = document.querySelector(`.reset-timer`);
 const short = document.querySelector(`.short-btn`);
 const long = document.querySelector(`.long-btn`);
-
+timer.style.setProperty('--timer-label', "'Work'");
+const date = new Date();
+const today = date.toLocaleDateString();
 const quote = document.querySelector(`.quote`);
 
 let interval;
 let isRunning = false;
 let currentMM = 25;
 let currentSS = 0;
+
+let stats = [{
+    date: "3/2/2025",
+    workSec: 0,
+    breakSec: 0,
+}];
 
 document.addEventListener('DOMContentLoaded', () => {
     start.addEventListener('click', () => {
@@ -35,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentMM = 25;
         currentSS = 0;
         updateDisplay();
+        timer.style.setProperty('--timer-label', "'Work'");
     });
 
     add5.addEventListener('click', () => {
@@ -68,6 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     loadQuote();
+    switchView('timer');
 });
 
 function loadQuote(){
@@ -100,6 +110,8 @@ function countdown() {
             start.textContent = 'start';
             return;
         }
+
+        getWorkOrBreakTime();
 
         if (currentSS === 0) {
             currentMM--;
@@ -143,3 +155,27 @@ function switchView(viewId) {
       switchView(viewId);
     });
   });
+
+function getWorkOrBreakTime() {
+    const currentLabel = timer.style.getPropertyValue('--timer-label').replace(/'/g, "");
+    if(currentLabel === 'Work'){
+        const start = Date.now();
+        console.log('work starting timer...');
+        setTimeout(() => {
+            const millis = Date.now() - start;
+            console.log(`seconds elapsed = ${Math.floor(millis / 1000)}`);
+        }, 1000);
+        stats[0].workSec += 1;
+        console.log(stats[0].workSec);
+    }   
+    if(currentLabel === 'Break'){
+        const start = Date.now();
+        console.log('break starting timer...');
+        setTimeout(() => {
+            const millis = Date.now() - start;
+            console.log(`seconds elapsed = ${Math.floor(millis / 1000)}`);
+        }, 1000);
+        stats[0].breakSec += 1;
+        console.log(stats[0].breakSec);
+    }
+}
