@@ -6,8 +6,7 @@ const reset = document.querySelector(`.reset-timer`);
 const short = document.querySelector(`.short-btn`);
 const long = document.querySelector(`.long-btn`);
 timer.style.setProperty('--timer-label', "'Work'");
-const date = new Date();
-const today = date.toLocaleDateString();
+const today = new Date().toISOString().split("T")[0];
 const quote = document.querySelector(`.quote`);
 
 let interval;
@@ -16,10 +15,15 @@ let currentMM = 25;
 let currentSS = 0;
 
 let stats = [{
-    date: "3/2/2025",
+    date: '2025-02-03',
     workSec: 0,
     breakSec: 0,
 }];
+
+if (today !== stats[0].date) {
+    stats.unshift({ date: today, workSec: 0, breakSec: 0 });
+    console.log(`added new stats object.`);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     start.addEventListener('click', () => {
