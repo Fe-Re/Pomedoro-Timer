@@ -3,7 +3,11 @@ const start = document.querySelector('.start-timer');
 const add5 = document.querySelector(`.add-5`);
 const sub5 = document.querySelector(`.sub-5`);
 const reset = document.querySelector(`.reset-timer`);
+const short = document.querySelector(`.short-btn`);
+const long = document.querySelector(`.long-btn`);
+
 const quote = document.querySelector(`.quote`);
+
 let interval;
 let isRunning = false;
 let currentMM = 25;
@@ -47,6 +51,22 @@ document.addEventListener('DOMContentLoaded', () => {
         currentSS = timer.textContent.slice(3,5);
     });
 
+    short.addEventListener('click', () => {
+        const currentLabel = timer.style.getPropertyValue('--timer-label');
+        const newLabel = currentLabel === "'Break'" ? "'Work'" : "'Break'";
+        timer.style.setProperty('--timer-label', newLabel);
+        currentMM = 5;
+        updateDisplay();
+    });
+
+    long.addEventListener('click', () => {
+        const currentLabel = timer.style.getPropertyValue('--timer-label');
+        const newLabel = currentLabel === "'Break'" ? "'Work'" : "'Break'";
+        timer.style.setProperty('--timer-label', newLabel);
+        currentMM = 15;
+        updateDisplay();
+    });
+
     loadQuote();
 });
 
@@ -64,12 +84,8 @@ function loadQuote(){
         `“It is not the mountain we conquer, but ourselves.” ― Sir Edmund Hillary`,
         `“If you love life, don’t waste time, for time is what life is made of.” – Bruce Lee`]
 
-       let randomSelect = getRandomInt(quotes.length);
-       console.log(randomSelect);
-       console.log(quotes.length)
-
+    let randomSelect = getRandomInt(quotes.length);
     quote.innerHTML = quotes[randomSelect];
-
 }
 
 

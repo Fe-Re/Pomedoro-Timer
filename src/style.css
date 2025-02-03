@@ -130,7 +130,7 @@ body{
     position: relative;
 }
 .timer-container .timer::after{
-    content: 'Work';
+    content: var(--timer-label, 'Work');
     font-size: 1.2rem;
     color: var(--accent-color);
     position: absolute;
