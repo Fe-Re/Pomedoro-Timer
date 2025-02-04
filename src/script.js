@@ -87,15 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 {
                     label: 'Work in min',
                     data: stats.map(entry => (entry.workSec/60)),
-                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: '#7469B6',
+                    borderColor: '#7469B6',
                     borderWidth: 1,
                 },
                 {
                     label: 'Break in min',
                     data: stats.map(entry => (entry.breakSec/60)),
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: '#E1AFD1',
+                    borderColor: '#E1AFD1',
                     borderWidth: 1,
                 }
             ]
