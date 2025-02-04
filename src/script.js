@@ -76,6 +76,75 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadQuote();
     switchView('timer');
+
+    const ctx = document.getElementById("chart").getContext("2d");
+
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: stats.map(entry => entry.date), 
+            datasets: [
+                {
+                    label: 'Work in min',
+                    data: stats.map(entry => (entry.workSec/60)),
+                    backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                },
+                {
+                    label: 'Break in min',
+                    data: stats.map(entry => (entry.breakSec/60)),
+                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    labels: {
+                        font: {
+                            size: 18 
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        font: {
+                            size: 18
+                        }
+                    },
+                    type: 'category',
+                    title: {
+                        display: true,
+                        text: 'Date',
+                        font: {
+                            size: 18
+                        }
+                    }
+                },
+                y: {
+                    ticks: {
+                        font: {
+                            size: 18
+                        }
+                    },
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Minutes',
+                        font: {
+                            size: 18
+                        }
+                    }
+                }
+            }
+        }
+    });
 });
 
 function loadQuote(){

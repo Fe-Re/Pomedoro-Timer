@@ -208,4 +208,6 @@ body{
     transform: scale(0.9);
 }
 
-
+.statistics-container{
+    padding: 20px 0;
+}
