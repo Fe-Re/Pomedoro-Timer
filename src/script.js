@@ -10,6 +10,7 @@ const quote = document.querySelector(`.quote`);
 timer.style.setProperty('--timer-label', "'Work'");
 
 let stats;
+let myChart;
 let interval;
 let isRunning = false;
 let currentMM = 25;
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const ctx = document.getElementById("chart").getContext("2d");
 
-    const myChart = new Chart(ctx, {
+    myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: stats.map(entry => entry.date), 
@@ -229,12 +230,14 @@ function switchView(viewId) {
     if(currentLabel === 'Work'){
         stats[0].workSec += 1;
         console.log(`work timer: ${stats[0].workSec}`);
-        localStorage.setItem(`stats`, JSON.stringify(stats)); 
+        localStorage.setItem(`stats`, JSON.stringify(stats));
+        updateChart(); 
     }   
     if(currentLabel === 'Break'){
         stats[0].breakSec += 1;
         console.log(`break timer: ${stats[0].breakSec}`);
-        localStorage.setItem(`stats`, JSON.stringify(stats)); 
+        localStorage.setItem(`stats`, JSON.stringify(stats));
+        updateChart(); 
     }
 }
 
@@ -256,4 +259,11 @@ function loadSave(){
         localStorage.setItem('stats', JSON.stringify(loadedStats));
     }
     return loadedStats;
+}
+
+function updateChart(){
+    myChart.data.labels = stats.map(entry => entry.date);
+    myChart.data.datasets[0].data = stats.map(entry => (entry.workSec/60));
+    myChart.data.datasets[1].data = stats.map(entry => (entry.breakSec/60));
+    myChart.update();
 }
