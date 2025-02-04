@@ -130,6 +130,7 @@ body{
     display: flex !important;
   }
   
+.music-container,
 .statistics-container,
 .timer-container{
     width: 900px;
