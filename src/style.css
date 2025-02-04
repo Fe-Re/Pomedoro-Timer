@@ -130,7 +130,7 @@ body{
     display: flex !important;
   }
   
-
+.statistics-container,
 .timer-container{
     width: 900px;
     height: 750px;
