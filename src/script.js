@@ -9,28 +9,17 @@ const quote = document.querySelector(`.quote`);
 
 timer.style.setProperty('--timer-label', "'Work'");
 
-const date = new Date();
-const year = date.getFullYear();
-const month = String(date.getMonth() + 1).padStart(2, "0");
-const day = String(date.getDate()).padStart(2, "0");
-const today = `${year}-${month}-${day}`;
-
+let stats;
 let interval;
 let isRunning = false;
 let currentMM = 25;
 let currentSS = 0;
 
-let stats = JSON.parse(localStorage.getItem(`stats`)) || [];
-if (!stats.length || stats[0].date !== today) {
-    stats.unshift({ date: today, workSec: 0, breakSec: 0 });
-}
-if (today !== stats[0].date) {
-    stats.unshift({ date: today, workSec: 0, breakSec: 0 });
-    console.log(`added new stats object.`);
-    localStorage.setItem(`stats`, JSON.stringify(stats));
-}
+
 
 document.addEventListener('DOMContentLoaded', () => {
+    stats = loadSave();
+
     start.addEventListener('click', () => {
         if (!isRunning) {
             isRunning = true;
@@ -107,8 +96,6 @@ function loadQuote(){
     quote.innerHTML = quotes[randomSelect];
 }
 
-
-
 function countdown() {
     interval = setInterval(() => {
         updateDisplay();
@@ -166,6 +153,9 @@ function switchView(viewId) {
   });
 
   function getWorkOrBreakTime() {
+    if (!stats[0]) { 
+        stats = initializeStats();
+    }
     const currentLabel = timer.style.getPropertyValue('--timer-label').replace(/'/g, "");
     if(currentLabel === 'Work'){
         stats[0].workSec += 1;
@@ -177,4 +167,24 @@ function switchView(viewId) {
         console.log(`break timer: ${stats[0].breakSec}`);
         localStorage.setItem(`stats`, JSON.stringify(stats)); 
     }
+}
+
+function loadSave(){
+    let loadedStats = JSON.parse(localStorage.getItem('stats')) || [];
+
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    const today = `${year}-${month}-${day}`;
+
+    if (!loadedStats.length || loadedStats[0].date !== today) {
+        loadedStats.unshift({ 
+            date: today, 
+            workSec: 0, 
+            breakSec: 0 
+        });
+        localStorage.setItem('stats', JSON.stringify(loadedStats));
+    }
+    return loadedStats;
 }
