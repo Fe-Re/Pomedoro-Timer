@@ -129,12 +129,18 @@ body{
   .active-view {
     display: flex !important;
   }
+
+.content-container{
+    width: 90%;
+    display: flex;
+    align-items: center;
+}
   
 .music-container,
 .statistics-container,
 .timer-container{
-    width: 900px;
-    height: 750px;
+    width: 100%;
+    height: 600px;
     display: flex;
     margin: 50px 50px;
     justify-content: space-evenly;
@@ -213,4 +219,48 @@ body{
 
 .statistics-container{
     padding: 20px 0;
+}
+
+@media (max-width: 450px){
+
+    .timer-container,
+    .statistics-container{
+        margin: 50px 20px;
+        
+    }
+    .statistics-container{
+        padding: 10px 10px;
+    }
+
+    .timer-container .timer{
+        font-size: 5rem;
+    }
+    .timer-container .quote{
+        padding: 0 40px;
+    }
+
+.start-timer > div,
+.reset-timer > div,
+.adjust-buttons > div,
+.pause-buttons > div {
+    padding: 10px 10px;
+}
+.adjust-buttons > div, .start-buttons > div {
+    padding: 10px 30px;
+}
+
+.timer-container .timer::after{
+    content: var(--timer-label, 'Work');
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    position: absolute;
+    top: -10px; left: 75px;
+    text-shadow: none;
+}
+
+.navbar ul li svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-1);
+  }
 }

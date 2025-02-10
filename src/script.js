@@ -78,6 +78,57 @@ document.addEventListener('DOMContentLoaded', () => {
     loadQuote();
     switchView('timer');
 
+    function getChartOptions() {
+        const isMobile = window.innerWidth < 768; // Mobile-Breakpoint (z. B. 768px)
+        
+        return {
+            responsive: true,
+            maintainAspectRatio: false, // Wichtig für mobile Ansicht
+            plugins: {
+                legend: {
+                    display: true,
+                    position: isMobile ? 'bottom' : 'top',
+                    labels: {
+                        font: {
+                            size: isMobile ? 12 : 18
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        font: {
+                            size: isMobile ? 12 : 18
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Date',
+                        font: {
+                            size: isMobile ? 14 : 18
+                        }
+                    }
+                },
+                y: {
+                    ticks: {
+                        font: {
+                            size: isMobile ? 12 : 18
+                        }
+                    },
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Minutes',
+                        font: {
+                            size: isMobile ? 14 : 18
+                        }
+                    }
+                }
+            }
+        };
+    }
+
     const ctx = document.getElementById("chart").getContext("2d");
 
     myChart = new Chart(ctx, {
@@ -101,50 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             ]
         },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    labels: {
-                        font: {
-                            size: 18 
-                        }
-                    }
-                }
-            },
-            scales: {
-                x: {
-                    ticks: {
-                        font: {
-                            size: 18
-                        }
-                    },
-                    type: 'category',
-                    title: {
-                        display: true,
-                        text: 'Date',
-                        font: {
-                            size: 18
-                        }
-                    }
-                },
-                y: {
-                    ticks: {
-                        font: {
-                            size: 18
-                        }
-                    },
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Minutes',
-                        font: {
-                            size: 18
-                        }
-                    }
-                }
-            }
-        }
+        options: getChartOptions()
     });
 });
 
